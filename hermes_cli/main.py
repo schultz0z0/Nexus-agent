@@ -286,6 +286,7 @@ from hermes_cli.subcommands.import_cmd import build_import_cmd_parser
 from hermes_cli.subcommands.config import build_config_parser
 from hermes_cli.subcommands.version import build_version_parser
 from hermes_cli.subcommands.update import build_update_parser
+from hermes_cli.subcommands.plan import build_plan_parser
 from hermes_cli.subcommands.uninstall import build_uninstall_parser
 from hermes_cli.subcommands.dashboard import build_dashboard_parser
 from hermes_cli.subcommands.gui import build_gui_parser
@@ -12753,6 +12754,12 @@ def main():
     # update command  (parser built in hermes_cli/subcommands/update.py)
     # =========================================================================
     build_update_parser(subparsers, cmd_update=cmd_update)
+
+    # =========================================================================
+    # plan command  (parser built in hermes_cli/subcommands/plan.py)
+    # =========================================================================
+    from hermes_cli.plan_mode import cmd_plan as _cmd_plan
+    build_plan_parser(subparsers, cmd_plan=_cmd_plan)
 
     # =========================================================================
     # uninstall command  (parser built in hermes_cli/subcommands/uninstall.py)
