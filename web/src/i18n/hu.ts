@@ -55,7 +55,7 @@ export const hu: Translations = {
     closeNavigation: "Navigáció bezárása",
     closeModelTools: "Modell és eszközök bezárása",
     footer: {
-      org: "Nous Research",
+      org: "Soluções Nexus AI",
     },
     activeSessionsLabel: "Aktív munkamenetek:",
     gatewayStatusLabel: "Átjáró állapota:",
@@ -120,7 +120,7 @@ export const hu: Translations = {
     starting: "Indul",
     startedInBackground: "Háttérben elindítva — kövesse a naplókat a folyamathoz",
     stopped: "Leállítva",
-    updateHermes: "Hermes frissítése",
+    updateHermes: "Nexus Agent frissítése",
     updatingHermes: "Hermes frissítése…",
     waitingForOutput: "Várakozás a kimenetre…",
   },

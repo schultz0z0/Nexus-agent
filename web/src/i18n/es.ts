@@ -55,7 +55,7 @@ export const es: Translations = {
     closeNavigation: "Cerrar navegación",
     closeModelTools: "Cerrar modelo y herramientas",
     footer: {
-      org: "Nous Research",
+      org: "Soluções Nexus AI",
     },
     activeSessionsLabel: "Sesiones activas:",
     gatewayStatusLabel: "Estado del Gateway:",
@@ -120,7 +120,7 @@ export const es: Translations = {
     starting: "Iniciando",
     startedInBackground: "Iniciado en segundo plano — revisa los registros para ver el progreso",
     stopped: "Detenido",
-    updateHermes: "Actualizar Hermes",
+    updateHermes: "Actualizar Nexus Agent",
     updatingHermes: "Actualizando Hermes…",
     waitingForOutput: "Esperando salida…",
   },

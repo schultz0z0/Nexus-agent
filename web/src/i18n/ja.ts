@@ -55,7 +55,7 @@ export const ja: Translations = {
     closeNavigation: "ナビゲーションを閉じる",
     closeModelTools: "モデルとツールを閉じる",
     footer: {
-      org: "Nous Research",
+      org: "Soluções Nexus AI",
     },
     activeSessionsLabel: "アクティブなセッション:",
     gatewayStatusLabel: "ゲートウェイの状態:",
@@ -120,7 +120,7 @@ export const ja: Translations = {
     starting: "起動中",
     startedInBackground: "バックグラウンドで起動しました — 進行状況はログをご確認ください",
     stopped: "停止",
-    updateHermes: "Hermes を更新",
+    updateHermes: "Nexus Agent を更新",
     updatingHermes: "Hermes を更新しています…",
     waitingForOutput: "出力を待機しています…",
   },

@@ -55,7 +55,7 @@ export const af: Translations = {
     closeNavigation: "Maak navigasie toe",
     closeModelTools: "Maak model en gereedskap toe",
     footer: {
-      org: "Nous Research",
+      org: "Soluções Nexus AI",
     },
     activeSessionsLabel: "Aktiewe Sessies:",
     gatewayStatusLabel: "Gateway-status:",
@@ -120,7 +120,7 @@ export const af: Translations = {
     starting: "Begin",
     startedInBackground: "Begin in agtergrond — kyk logs vir vordering",
     stopped: "Gestop",
-    updateHermes: "Werk Hermes op",
+    updateHermes: "Werk Nexus Agent op",
     updatingHermes: "Besig om Hermes op te werk…",
     waitingForOutput: "Wag vir uitset…",
   },

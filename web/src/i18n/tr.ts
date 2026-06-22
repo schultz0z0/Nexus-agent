@@ -55,7 +55,7 @@ export const tr: Translations = {
     closeNavigation: "Gezintiyi kapat",
     closeModelTools: "Modeli ve araçları kapat",
     footer: {
-      org: "Nous Research",
+      org: "Soluções Nexus AI",
     },
     activeSessionsLabel: "Aktif Oturumlar:",
     gatewayStatusLabel: "Ağ Geçidi Durumu:",
@@ -120,7 +120,7 @@ export const tr: Translations = {
     starting: "Başlatılıyor",
     startedInBackground: "Arka planda başlatıldı — ilerleme için günlüklere bakın",
     stopped: "Durduruldu",
-    updateHermes: "Hermes'i Güncelle",
+    updateHermes: "Nexus Agent'i Güncelle",
     updatingHermes: "Hermes güncelleniyor…",
     waitingForOutput: "Çıktı bekleniyor…",
   },

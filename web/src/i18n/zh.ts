@@ -54,7 +54,7 @@ export const zh: Translations = {
     closeNavigation: "关闭导航",
     closeModelTools: "关闭模型与工具",
     footer: {
-      org: "Nous Research",
+      org: "Soluções Nexus AI",
     },
     activeSessionsLabel: "活跃会话：",
     gatewayStatusLabel: "网关状态：",
@@ -119,7 +119,7 @@ export const zh: Translations = {
     starting: "启动中",
     startedInBackground: "已在后台启动 — 请查看日志",
     stopped: "已停止",
-    updateHermes: "更新 Hermes",
+    updateHermes: "更新 Nexus Agent",
     updatingHermes: "正在更新 Hermes…",
     waitingForOutput: "等待输出…",
   },
