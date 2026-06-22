@@ -75,17 +75,180 @@ export function useGatewayBoot({
 
   useEffect(() => {
     let cancelled = false
-    const desktop = window.hermesDesktop
+    const rawDesktop = window.hermesDesktop
 
     const publish = (next: HermesConnection | null) => {
       callbacksRef.current.onConnectionReady(next)
       setConnection(next)
     }
 
+    // -------------------------------------------------------------------------
+    // Standalone mode (no Electron): window.hermesDesktop is undefined when the
+    // web UI is served by `hermes dashboard` (or the Docker image) instead of
+    // the Tauri/Electron desktop app. The IPC bridge powers desktop-only
+    // features (boot progress overlay, exit notifications, power-resume
+    // reconnect, OAuth ticket minting, window state, etc.) — none of which the
+    // standalone dashboard needs. We synthesize a minimal stub that:
+    //   - `getConnection()` returns a local HermesConnection pointing at the
+    //     same origin as the dashboard, with authMode='token' so
+    //     resolveGatewayWsUrl() falls back to conn.wsUrl (no OAuth mint).
+    //   - Every other method is a safe no-op (optional chaining below).
+    // The rest of the hook then runs unchanged, opening a plain WebSocket
+    // against the backend's /ws endpoint. If the user wants full desktop
+    // features they should launch `hermes desktop` instead.
+    // -------------------------------------------------------------------------
+    let desktop: typeof window.hermesDesktop
+    let isStandalone = false
+    if (rawDesktop) {
+      desktop = rawDesktop
+    } else {
+      isStandalone = true
+      const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+      const baseUrl = window.location.origin
+      const wsUrl = `${proto}//${window.location.host}/ws`
+      const localConn: HermesConnection = {
+        baseUrl,
+        isFullscreen: false,
+        mode: 'local',
+        authMode: 'token',
+        nativeOverlayWidth: 0,
+        source: 'local',
+        token: '',
+        wsUrl,
+        logs: [],
+        profile: 'default',
+        windowButtonPosition: null
+      }
+      desktop = {
+        getConnection: async () => localConn,
+        revalidateConnection: async () => ({ ok: true, rebuilt: false }),
+        touchBackend: async () => ({ ok: true }),
+        getGatewayWsUrl: async () => wsUrl,
+        getBootProgress: async () => ({
+          error: null,
+          fakeMode: false,
+          message: 'Standalone web dashboard (no desktop IPC)',
+          phase: 'standalone',
+          progress: 100,
+          running: false,
+          timestamp: Date.now()
+        }),
+        getConnectionConfig: async () => ({
+          envOverride: false,
+          mode: 'local',
+          profile: 'default',
+          remoteAuthMode: 'token',
+          remoteOauthConnected: false,
+          remoteTokenPreview: null,
+          remoteTokenSet: false,
+          remoteUrl: baseUrl
+        }),
+        saveConnectionConfig: async () => desktop!.getConnectionConfig() as never,
+        applyConnectionConfig: async () => desktop!.getConnectionConfig() as never,
+        testConnectionConfig: async () => ({
+          baseUrl,
+          ok: true,
+          version: 'standalone'
+        }),
+        probeConnectionConfig: async () => ({
+          baseUrl,
+          reachable: true,
+          authMode: 'token',
+          providers: [],
+          version: 'standalone',
+          error: null
+        }),
+        oauthLoginConnectionConfig: async () => ({
+          ok: false,
+          baseUrl,
+          connected: false
+        }),
+        oauthLogoutConnectionConfig: async () => ({
+          ok: true,
+          baseUrl,
+          connected: false
+        }),
+        profile: {
+          get: async () => ({ profile: 'default' }),
+          set: async () => ({ profile: 'default' })
+        },
+        api: async <T,>() => ({} as T),
+        notify: async () => true,
+        requestMicrophoneAccess: async () => false,
+        readFileDataUrl: async () => '',
+        readFileText: async () => ({ binary: false, language: 'text', mimeType: 'text/plain', path: '', text: '', truncated: false }),
+        selectPaths: async () => [],
+        writeClipboard: async () => true,
+        saveImageFromUrl: async () => false,
+        saveImageBuffer: async () => '',
+        saveClipboardImage: async () => '',
+        getPathForFile: () => '',
+        normalizePreviewTarget: async () => null,
+        watchPreviewFile: async () => ({ id: 'standalone' }),
+        stopPreviewFileWatch: async () => true,
+        openExternal: async () => undefined,
+        fetchLinkTitle: async () => '',
+        sanitizeWorkspaceCwd: async (cwd) => ({ cwd: cwd ?? '', sanitized: false }),
+        settings: {
+          getDefaultProjectDir: async () => ({ defaultLabel: 'standalone', dir: null, resolvedCwd: '' }),
+          pickDefaultProjectDir: async () => ({ canceled: true, dir: null }),
+          setDefaultProjectDir: async () => ({ dir: null })
+        },
+        revealLogs: async () => ({ ok: true, path: '' }),
+        getRecentLogs: async () => ({ path: '', lines: [] }),
+        readDir: async () => ({ path: '', entries: [] }),
+        terminal: {
+          dispose: async () => false,
+          onData: () => () => undefined,
+          onExit: () => () => undefined,
+          resize: async () => false,
+          start: async () => ({ id: 'standalone', shell: '', cwd: '' }),
+          write: async () => false
+        },
+        onPreviewFileChanged: () => () => undefined,
+        onBackendExit: () => () => undefined,
+        onBootProgress: () => () => undefined,
+        getBootstrapState: async () => ({ active: false, manifest: null, stages: {}, error: null, log: [], startedAt: null, completedAt: null, unsupportedPlatform: null }),
+        resetBootstrap: async () => ({ ok: true }),
+        repairBootstrap: async () => ({ ok: true }),
+        cancelBootstrap: async () => ({ ok: true, cancelled: false }),
+        onBootstrapEvent: () => () => undefined,
+        getVersion: async () => ({ appVersion: 'standalone', electronVersion: '', nodeVersion: '', platform: 'web', hermesRoot: '' }),
+        updates: {
+          check: async () => ({ supported: false, message: 'Updates are not available in standalone web mode. Use `hermes update` from the terminal.' }),
+          apply: async () => ({ ok: false, error: 'standalone_mode', message: 'Updates are not available in standalone web mode. Use `hermes update` from the terminal.' }),
+          getBranch: async () => ({ branch: 'main' }),
+          setBranch: async () => ({ branch: 'main' }),
+          onProgress: () => () => undefined
+        },
+        uninstall: {
+          summary: async () => ({ hermes_home: '', agent_installed: false, gui_installed: false, source_built_artifacts: [], packaged_app_paths: [], userdata_dir: '', userdata_exists: false, platform: 'web' }),
+          run: async () => ({ ok: false, error: 'standalone_mode' })
+        },
+        themes: {
+          fetchMarketplace: async () => ({ files: [] }),
+          searchMarketplace: async () => []
+        }
+      } as typeof window.hermesDesktop
+
+      // Surface a non-blocking notice so users know they're in standalone mode.
+      // We do this once per mount, not every reconnect.
+      notify({
+        kind: 'info',
+        title: 'Nexus Web Dashboard (standalone)',
+        body: 'You are running the dashboard in a browser, not the desktop app. Some desktop-only features (system file pickers, native notifications, exit-on-close handling) are unavailable. Run `hermes desktop` for the full experience.',
+        silent: false,
+        durationMs: 8000
+      })
+    }
+
     if (!desktop) {
+      // Defensive: if even the stub failed to construct, fall back to the
+      // original failure path. Should never happen because the stub is fully
+      // local, but keeps the old behaviour in case of future regressions.
       failDesktopBoot('Desktop IPC bridge is unavailable.')
       setSessionsLoading(false)
-
+      void isStandalone
       return () => void (cancelled = true)
     }
 
