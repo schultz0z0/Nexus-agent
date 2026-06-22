@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Hermes",
-  "version": "0.0.1",
-  "identifier": "com.nousresearch.hermes.setup",
+  "productName": "Nexus Agent",
+  "version": "0.1.0",
+  "identifier": "com.solucoesnexus.nexus-agent.setup",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://127.0.0.1:5175",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "Hermes",
+        "title": "Nexus Agent Setup",
         "width": 880,
         "height": 620,
         "minWidth": 720,
@@ -34,10 +34,10 @@
   "bundle": {
     "active": true,
     "category": "DeveloperTool",
-    "shortDescription": "Hermes",
-    "longDescription": "Installs Hermes Agent on your machine. Drives scripts/install.ps1 (Windows) and scripts/install.sh (macOS/Linux).",
-    "publisher": "Nous Research",
-    "copyright": "Copyright © 2026 Nous Research",
+    "shortDescription": "Nexus Agent",
+    "longDescription": "Installs Nexus Agent on your machine. Drives scripts/install.ps1 (Windows) and scripts/install.sh (macOS/Linux).",
+    "publisher": "Soluções Nexus AI",
+    "copyright": "Copyright © 2026 Soluções Nexus AI",
     "targets": [
       "app",
       "dmg",
