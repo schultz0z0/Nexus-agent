@@ -1,5 +1,8 @@
 """
-Hermes CLI - Unified command-line interface for Hermes Agent.
+Nexus Agent CLI - Unified command-line interface for Nexus Agent.
+
+Forked from Hermes Agent (Nous Research, MIT) and rebranded as Nexus Agent
+by Soluções Nexus AI (https://github.com/schultz0z0/Nexus-agent).
 
 Provides subcommands for:
 - hermes chat          - Interactive chat (same as ./hermes)
@@ -14,8 +17,11 @@ Provides subcommands for:
 import os
 import sys
 
-__version__ = "0.17.0"
-__release_date__ = "2026.6.19"
+__version__ = "0.17.1-nexus.1"
+__release_date__ = "2026.6.22"
+__product_name__ = "Nexus Agent"
+__vendor__ = "Soluções Nexus AI"
+__upstream__ = "Hermes Agent (Nous Research, MIT)"
 
 
 def _ensure_utf8():
