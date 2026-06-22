@@ -4,13 +4,13 @@
 > Repositório: https://github.com/schultz0z0/Nexus-agent
 > Mantido por: Soluções Nexus AI
 
-Instructions for AI coding assistants and developers working on the hermes-agent codebase.
+Instructions for AI coding assistants and developers working on the Nexus Agent codebase (forked from the hermes-agent codebase).
 
 **Never give up on the right solution.**
 
-## What Hermes Is
+## What Nexus Is
 
-Hermes is a personal AI agent that runs the same agent core across a CLI, a
+Nexus Agent is a personal AI agent that runs the same agent core across a CLI, a
 messaging gateway (Telegram, Discord, Slack, and ~20 other platforms), a TUI,
 and an Electron desktop app. It learns across sessions (memory + skills),
 delegates to subagents, runs scheduled jobs, and drives a real terminal and

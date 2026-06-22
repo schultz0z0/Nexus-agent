@@ -1,6 +1,20 @@
-# Contributing to Hermes Agent
+# Contributing to Nexus Agent
 
-Thank you for contributing to Hermes Agent! This guide covers everything you need: setting up your dev environment, understanding the architecture, deciding what to build, and getting your PR merged.
+> **Nexus Agent** is a white-label fork of [Hermes Agent](https://github.com/NousResearch/hermes-agent) by Nous Research (MIT), maintained by [Soluções Nexus AI](https://github.com/schultz0z0/Nexus-agent). We track upstream `main` and merge bug fixes and features from there. Issues and PRs in this fork should focus on the white-label, distribution, and rebrand-specific concerns. For general agent behavior, please open the issue on the upstream [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) repository — if it's accepted there, we can fast-forward this fork to include it.
+
+Thank you for contributing to Nexus Agent! This guide covers everything you need: setting up your dev environment, understanding the architecture, deciding what to build, and getting your PR merged.
+
+---
+
+## Fork vs. upstream — where to contribute what
+
+| If your change is about… | Open it on… |
+|---|---|
+| Core agent behavior, gateway, MCP, tools, skills, models | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) (upstream) — we'll merge it back here. |
+| White-label branding, distributable layout, vendor info, fork-specific docs | [schultz0z0/Nexus-agent](https://github.com/schultz0z0/Nexus-agent) (this fork). |
+| Bug specific to this fork's build/CI/distribution | This fork. |
+
+We follow the upstream's contribution priorities and architecture rules (see the linked `AGENTS.md` for the design contract). The Nexus fork only diverges on branding, packaging, and distribution — never on core agent semantics.
 
 ---
 
