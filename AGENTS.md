@@ -1,4 +1,8 @@
-# Hermes Agent - Development Guide
+# Nexus Agent - Development Guide
+
+> Fork white-label baseado no Hermes Agent da Nous Research (MIT).
+> Repositório: https://github.com/schultz0z0/Nexus-agent
+> Mantido por: Soluções Nexus AI
 
 Instructions for AI coding assistants and developers working on the hermes-agent codebase.
 
